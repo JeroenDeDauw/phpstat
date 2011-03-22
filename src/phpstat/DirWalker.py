@@ -11,7 +11,7 @@ class DirWalker(object):
     classdocs
     '''
     
-    _files = []
+    _tree = []
     
     def __init__(self):
         '''
@@ -20,29 +20,37 @@ class DirWalker(object):
         
         
     def walk(self, rootdir):
-        fileList = {}
-        dirStack = [rootdir]
-
-        while dirStack:
-            directory = dirStack.pop()
-            fileList[directory] = []
-            
-            for item in os.listdir(directory):
-                if not item.startswith('.'):
-                    fullname = os.path.join(directory, item)
-                    
-                    if os.path.isdir(fullname):
-                        if not os.path.islink(fullname): dirStack.append(fullname)
-                    else :
-                        fileList[directory].append(item)
+        self._tree = self.walk_through_dir(rootdir)
         
-        self._files =  fileList 
+    def walk_through_dir(self, rootdir):
+        itemList = {'files': {}, 'dirs': {}}
+
+        for item in os.listdir(rootdir):
+            fullname = os.path.join(rootdir, item)
+            
+            if not item.startswith('.') and not os.path.islink(fullname):
+                if os.path.isdir(fullname):
+                    itemList['dirs'][item] = self.walk_through_dir(fullname)
+                else :
+                    itemList['files'][item] = self.get_file_stats(fullname)
+        
+        return itemList     
         
     def get_file_stats(self, filepath):
         return filepath
     
     def get_stats(self):
-        files = []
-        for dir, data in self._files.iteritems():
-            files.append(dir + "\n-- " + "\n-- ".join(data) + "\n")
-        return '\n'.join(files)
+        return self.repr_as_indented_list(self._tree, 0)
+    
+    def repr_as_indented_list(self, tree, indentLevel):
+        segments = []
+        
+        for file, data in tree['files'].iteritems():
+            segments.append("  " * indentLevel +  "-- " + file + ": " + "example data" + "\n")
+            
+        for dir, data in tree['dirs'].iteritems():
+            segments.append("  " * indentLevel +  "-- " + dir + ": " + "example dir data" + "\n")
+            segments.append(self.repr_as_indented_list(data, indentLevel + 1))            
+        
+        return ''.join(segments)
+        
