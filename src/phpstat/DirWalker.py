@@ -17,22 +17,5 @@ class DirWalker(object):
         Constructor
         '''
         
-    def get_dir_info(self, rootdir):
-        dir = DirInfo(rootdir)
 
-        for item in os.listdir(rootdir):
-            fullname = os.path.join(rootdir, item)
-            
-            if not item.startswith('.') and not os.path.islink(fullname):
-                if os.path.isdir(fullname):
-                    dir.add_dir(self.get_dir_info(fullname))
-                else :
-                    file = FileInfo(item)
-                    file.filesize = 42
-                    dir.add_file(file)
-        
-        return dir
-        
-    def get_file_stats(self, filepath):
-        return filepath
         

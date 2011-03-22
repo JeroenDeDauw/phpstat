@@ -21,9 +21,12 @@ class FileInfo(object):
         Constructor
         '''
         self._filename = filename
-        
+    
+    def get_file_stats(self, filepath):
+        return filepath    
+    
     def __repr__(self):
-        pass
+        return self._filename + " ~fancy stats be here~"
         
     def get_filename(self):
         return self._filename
