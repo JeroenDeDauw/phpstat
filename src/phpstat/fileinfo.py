@@ -9,18 +9,16 @@ class FileInfo(object):
     classdocs
     '''
     
-    filesize = -1
-    codelines = -1
-    commentlines = -1
-    whitespacelines = -1 
-    
-    _filename = ''
-    
     def __init__(self, filename):
         '''
         Constructor
         '''
         self._filename = filename
+            
+        self.filesize = -1
+        self.codelines = -1
+        self.commentlines = -1
+        self.whitespacelines = -1 
     
     def get_file_stats(self, filepath):
         return filepath    
