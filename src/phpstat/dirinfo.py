@@ -25,9 +25,9 @@ class DirInfo(object):
     def init_if_needed(self):
         if not self._initiated:
             self._initiated = True
-            self.get_dir_info(self._path)
+            self._get_dir_info(self._path)
     
-    def get_dir_info(self, rootdir):
+    def _get_dir_info(self, rootdir):
         for item in os.listdir(rootdir):
             fullname = os.path.join(rootdir, item)
             
@@ -40,8 +40,8 @@ class DirInfo(object):
                     self._files.append(file)
         
     def __repr__(self):
-        #self.init_if_needed()
-        return self._path + " ~some fancy stats be here~"     
+        self.init_if_needed()
+        return self._path + " (%r dirs, %r files)" % (len(self._dirs), len(self._files))     
         
     def get_files(self):
         self.init_if_needed()
