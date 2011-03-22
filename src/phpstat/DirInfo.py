@@ -15,7 +15,6 @@ class DirInfo(object):
     _path = ''
     _files = []
     _dirs = []
-    _initiated = False
 
     def __init__(self, path):
         '''
@@ -23,10 +22,10 @@ class DirInfo(object):
         '''
         
         self._path = path
+        self._initiated = False
     
     def init_if_needed(self):
         if not self._initiated:
-            self._initiated = True
             self.get_dir_info(self._path)
     
     def get_dir_info(self, rootdir):
