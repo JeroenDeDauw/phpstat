@@ -52,15 +52,22 @@ class DirInfo(object):
                     if self._recursive:
                         self._filecount += dir.get_filecount()
                         self._dircount += dir.get_dircount()
+                        self._totalsize += dir.get_totalsize()
                 else:
                     file = FileInfo(rootdir, item)
                     self._files.append(file)
                     self._filecount += 1
+                    self._totalsize += file.get_filesize()
     
     def __repr__(self, recursive=None):
         self.set_recursive(recursive)
         self._init_if_needed()
-        return "%r (%r dirs, %r files)" % (self._path, self._dircount, self._filecount)     
+        return "%r (%r dirs, %r files) %r" % (
+           self._path,
+           self._dircount,
+           self._filecount,
+           self._totalsize
+        )     
     
     '''
     Sets that the directory should report data obtained recursivly,
