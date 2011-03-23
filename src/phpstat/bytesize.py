@@ -8,7 +8,7 @@ import math
 
 class ByteSize(object):
     '''
-    classdocs
+    Simple class to get a representatation of a byte size
     '''
     
     _units = {
@@ -35,7 +35,7 @@ class ByteSize(object):
             base = math.pow(2, 10) if self._binaryUnits else math.pow(10, 3)
             log = math.floor(math.log(self._byteCount, base))
         else:
-            log = 0    
+            log = 0
 
         if log == 0:
             return str(self._byteCount) + " " + ("byte" if self._byteCount == 1 else "bytes")
