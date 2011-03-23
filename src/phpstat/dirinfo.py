@@ -38,10 +38,10 @@ class DirInfo(object):
                     file = FileInfo(item)
                     file.filesize = 42
                     self._files.append(file)
-        
+    
     def __repr__(self):
         self.init_if_needed()
-        return self._path + " (%r dirs, %r files)" % (len(self._dirs), len(self._files))     
+        return "%r (%r dirs, %r files)" % (self._path, len(self._dirs), len(self._files))     
         
     def get_files(self):
         self.init_if_needed()
