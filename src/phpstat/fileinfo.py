@@ -26,7 +26,10 @@ class FileInfo(object):
         self._initiated = False
     
     def _get_file_stats(self):
-        with open(os.path.join(self._dirpath, self._filename), 'r') as file:
+        path = os.path.join(self._dirpath, self._filename)
+        self._filesize = os.path.getsize(path)
+        
+        with open(path, 'r') as file:
             inCommentBlock = False
             
             for line in file.readlines():
