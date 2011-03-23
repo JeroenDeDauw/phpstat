@@ -8,7 +8,7 @@ import os
 
 class FileInfo(object):
     '''
-    classdocs
+    Simple class to represent a file and obtain data about if when needed.
     '''
     
     def __init__(self, dirpath, filename):
@@ -41,7 +41,6 @@ class FileInfo(object):
                     self._codelines += 1
                     if stripped.count('/*') > 0:
                         inCommentBlock = True
-                
     
     def __repr__(self):
         return "%r (%r lines: %r code, %r comment, %r empty) %r" % (

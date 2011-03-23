@@ -5,6 +5,9 @@ Created on Mar 22, 2011
 '''
 
 class DirPrinter(object):
+    '''
+    Simple class to print a representatation of a DirInfo object.
+    '''    
     
     def prnt(self, dir):
         return self.repr_as_indented_list(dir, 0)

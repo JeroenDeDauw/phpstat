@@ -9,7 +9,7 @@ from fileinfo import FileInfo
 
 class DirInfo(object):
     '''
-    classdocs
+    Simple class to represent a directory and obtain data about if when needed.
     '''
     
     def __init__(self, path):
