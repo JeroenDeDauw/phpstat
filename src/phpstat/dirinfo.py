@@ -31,6 +31,9 @@ class DirInfo(object):
         self._commentlines = 0
         self._whitespacelines = 0
         
+    '''
+    Check if the dir data is cached, and if not, obtain it.
+    '''
     def _init_if_needed(self):
         if not self._initiated:
             self._initiated = True
@@ -59,6 +62,11 @@ class DirInfo(object):
         self._init_if_needed()
         return "%r (%r dirs, %r files)" % (self._path, self._dircount, self._filecount)     
     
+    '''
+    Sets that the directory should report data obtained recursivly,
+    or only look at what's directly in it. Note that changing the
+    recursive setting invalidates the cached info.
+    '''        
     def set_recursive(self, recursive):
         if recursive is not None and recursive != self._recursive:
             self._recursive = recursive

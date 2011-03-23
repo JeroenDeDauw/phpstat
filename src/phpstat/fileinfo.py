@@ -25,6 +25,14 @@ class FileInfo(object):
         
         self._initiated = False
     
+    '''
+    Check if the file data is cached, and if not, obtain it.
+    '''        
+    def _init_if_needed(self):
+        if not self._initiated:
+            self._initiated = True
+            self._get_file_stats()     
+    
     def _get_file_stats(self):
         path = os.path.join(self._dirpath, self._filename)
         self._filesize = os.path.getsize(path)
@@ -55,12 +63,7 @@ class FileInfo(object):
             self.get_comment_lines(),
             self.get_whitespace_lines(),
             self.get_filesize()
-        )
-        
-    def _init_if_needed(self):
-        if not self._initiated:
-            self._initiated = True
-            self._get_file_stats()        
+        )       
         
     def get_filename(self):
         return self._filename
