@@ -35,7 +35,7 @@ class DirInfo(object):
                 if os.path.isdir(fullname):
                     self._dirs.append(DirInfo(fullname))
                 else :
-                    file = FileInfo(item)
+                    file = FileInfo(rootdir, item)
                     file.filesize = 42
                     self._files.append(file)
     

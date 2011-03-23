@@ -4,26 +4,44 @@ Created on Mar 22, 2011
 @author: jeroen
 '''
 
+import os
+
 class FileInfo(object):
     '''
     classdocs
     '''
     
-    def __init__(self, filename):
+    def __init__(self, dirpath, filename):
         '''
         Constructor
         '''
         self._filename = filename
+        self._dirpath = dirpath
             
         self._filesize = -1
-        self._codelines = -1
-        self._commentlines = -1
-        self._whitespacelines = -1 
+        self._codelines = 0
+        self._commentlines = 0
+        self._whitespacelines = 0 
         
         self._initiated = False
     
     def _get_file_stats(self):
-        pass 
+        with open(os.path.join(self._dirpath, self._filename), 'r') as file:
+            inCommentBlock = False
+            
+            for line in file.readlines():
+                stripped = line.strip()
+                if len(stripped) == 0:
+                    self._whitespacelines += 1
+                elif inCommentBlock or stripped.startswith('#') or stripped.startswith('//'):
+                    self._commentlines += 1
+                    if stripped.count('*/') > 0:
+                        inCommentBlock = False
+                else:
+                    self._codelines += 1
+                    if stripped.count('/*') > 0:
+                        inCommentBlock = True
+                
     
     def __repr__(self):
         return "%r (%r lines: %r code, %r comment, %r empty) %r" % (
