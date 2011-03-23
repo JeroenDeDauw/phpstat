@@ -41,9 +41,11 @@ class FileInfo(object):
                     if stripped.count('*/') > 0:
                         inCommentBlock = False
                 else:
-                    self._codelines += 1
                     if stripped.count('/*') > 0:
                         inCommentBlock = True
+                        self._commentlines += 1
+                    else:
+                        self._codelines += 1
     
     def __repr__(self):
         return "%r (%r lines: %r code, %r comment, %r empty) %r" % (
@@ -55,7 +57,7 @@ class FileInfo(object):
             self.get_filesize()
         )
         
-    def init_if_needed(self):
+    def _init_if_needed(self):
         if not self._initiated:
             self._initiated = True
             self._get_file_stats()        
@@ -64,21 +66,21 @@ class FileInfo(object):
         return self._filename
     
     def get_filesize(self):
-        self.init_if_needed()
+        self._init_if_needed()
         return self._filesize
     
     def get_code_lines(self):
-        self.init_if_needed()
+        self._init_if_needed()
         return self._codelines
     
     def get_comment_lines(self):
-        self.init_if_needed()
+        self._init_if_needed()
         return self._commentlines
     
     def get_whitespace_lines(self):
-        self.init_if_needed()
+        self._init_if_needed()
         return self._whitespacelines
     
     def get_line_count(self):
-        self.init_if_needed()
+        self._init_if_needed()
         return self._codelines + self._commentlines + self._whitespacelines
