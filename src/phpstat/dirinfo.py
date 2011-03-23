@@ -6,6 +6,7 @@ Created on Mar 22, 2011
 
 import os
 from fileinfo import FileInfo
+from bytesize import ByteSize
 
 class DirInfo(object):
     '''
@@ -66,8 +67,8 @@ class DirInfo(object):
            self._path,
            self._dircount,
            self._filecount,
-           self._totalsize
-        )     
+           ByteSize(self._totalsize).__repr__()
+        )
     
     '''
     Sets that the directory should report data obtained recursivly,

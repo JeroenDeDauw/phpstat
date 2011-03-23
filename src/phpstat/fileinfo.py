@@ -5,6 +5,7 @@ Created on Mar 22, 2011
 '''
 
 import os
+from bytesize import ByteSize
 
 class FileInfo(object):
     '''
@@ -62,7 +63,7 @@ class FileInfo(object):
             self.get_code_lines(),
             self.get_comment_lines(),
             self.get_whitespace_lines(),
-            self.get_filesize()
+            ByteSize(self.get_filesize()).__repr__()
         )       
         
     def get_filename(self):
