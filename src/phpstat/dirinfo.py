@@ -54,20 +54,30 @@ class DirInfo(object):
                         self._filecount += dir.get_filecount()
                         self._dircount += dir.get_dircount()
                         self._totalsize += dir.get_totalsize()
+                        self._codelines += dir.get_code_lines()
+                        self._commentlines += dir.get_comment_lines()
+                        self._whitespacelines += dir.get_whitespace_lines()                        
                 else:
                     file = FileInfo(rootdir, item)
                     self._files.append(file)
                     self._filecount += 1
                     self._totalsize += file.get_filesize()
+                    self._codelines += file.get_code_lines()
+                    self._commentlines += file.get_comment_lines()
+                    self._whitespacelines += file.get_whitespace_lines()
     
     def __repr__(self, recursive=None):
         self.set_recursive(recursive)
         self._init_if_needed()
-        return "%r (%r dirs, %r files) %r" % (
-           self._path,
-           self._dircount,
-           self._filecount,
-           ByteSize(self._totalsize).__repr__()
+        return "%r (%r dirs, %r files, %r lines: %r code, %r comment, %r empty) %r" % (
+            self._path,
+            self._dircount,
+            self._filecount,
+            self.get_line_count(),
+            self.get_code_lines(),
+            self.get_comment_lines(),
+            self.get_whitespace_lines(),           
+            ByteSize(self._totalsize).__repr__()
         )
     
     '''
