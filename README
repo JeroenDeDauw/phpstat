@@ -1,7 +1,7 @@
-This is some simple, and probably crappy, python utility to compute and display
+This is some simple, and probably crappy, Python utility to compute and display
 basic statistics for PHP and JavaScript projects (such as most MediaWiki extensions).
 
 I mainly wrote this as exercice to get a better feel on Python modules and packages,
-sipmple data structures, control flow, and classes.
+simple data structures, control flow, and classes.
 
 Needs some nicifying to make it generally usable :)
