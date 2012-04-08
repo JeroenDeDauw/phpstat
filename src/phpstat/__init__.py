@@ -7,7 +7,7 @@ from dirprinter import DirPrinter
 #@app.route('/')
 def print_list():
     printer = DirPrinter()
-    return printer.prnt(DirInfo('/var/www/extensions/Maps/', True))   
+    return printer.prnt(DirInfo('/var/www/extensions/SemanticMediaWiki/', True))   
 
 if __name__ == '__main__':
     print print_list()

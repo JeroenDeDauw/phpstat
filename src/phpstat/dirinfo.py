@@ -69,7 +69,8 @@ class DirInfo(object):
     def __repr__(self, recursive=None):
         self.set_recursive(recursive)
         self._init_if_needed()
-        return "%r (%r dirs, %r files, %r lines: %r code, %r comment, %r empty) %r" % (
+        
+        return "%s (%s dirs, %s files, %s lines: %s code, %s comment, %s empty) %s" % (
             self._path,
             self._dircount,
             self._filecount,

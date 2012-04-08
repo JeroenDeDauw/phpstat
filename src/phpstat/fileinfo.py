@@ -57,7 +57,7 @@ class FileInfo(object):
                         self._codelines += 1
     
     def __repr__(self):
-        return "%r (%r lines: %r code, %r comment, %r empty) %r" % (
+        return "%s (%s lines: %s code, %s comment, %s empty) %s" % (
             self._filename,
             self.get_line_count(),
             self.get_code_lines(),

@@ -42,4 +42,4 @@ class ByteSize(object):
         else:
             log = min([8, log])
             count = round(self._byteCount / pow(base, log), 2)
-            return "%r %r%rB" % (str(count), self._units[log], "i" if self._binaryUnits else "")
+            return "%s %s%sB" % (count, self._units[log], "i" if self._binaryUnits else "")
